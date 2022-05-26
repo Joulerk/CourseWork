@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87c5a1161f1b48c9833920b5323a3252" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="PostalServiceModel.Address" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.District" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Person" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Postman" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Publication" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.PubType" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Sector" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Street" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Subscriber" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.Subscription" Width="1.5" PointX="12" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.AddressesView" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.PublicationsView" Width="1.5" PointX="2.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostalServiceModel.SubscribersView" Width="1.5" PointX="4.75" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="PostalServiceModel.FK_Addresses_Districts" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Addresses_Streets" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Subscribers_Addresses" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Disctricts_Postmans" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Disctricts_Sectors" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Postmans_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Subscribers_Persons" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Publications_Pubtypes" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Subscribes_Publications" ManuallyRouted="false" />
+        <AssociationConnector Association="PostalServiceModel.FK_Subscribes_Subscribers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PostalServiceModel.PostmansAddView" Width="1.5" PointX="8.5" PointY="9" />
+        <EntityTypeShape EntityType="PostalServiceModel.PostmansView" Width="1.5" PointX="0.75" PointY="11.375" />
+        <EntityTypeShape EntityType="PostalServiceModel.SubscribersAddView" Width="1.5" PointX="8.5" PointY="10.625" />
+        <EntityTypeShape EntityType="PostalServiceModel.SubscriptionsView" Width="1.5" PointX="6.5" PointY="9" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

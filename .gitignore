@@ -1,0 +1,5 @@
+# папки и файлы, не добавляемые в СКВ
+.vs
+.git
+CourseWork/bin
+CourseWork/obj

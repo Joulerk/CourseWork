@@ -1,0 +1,1154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище PostalServiceModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdStreet" Type="int" Nullable="false" />
+          <Property Name="Building" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="IdDistrict" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Districts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPostman" Type="int" Nullable="false" />
+          <Property Name="IdSector" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postmans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPerson" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPubType" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PubIndex" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PubTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sectors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscribers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPerson" Type="int" Nullable="false" />
+          <Property Name="IdAddress" Type="int" Nullable="false" />
+          <Property Name="SubAddress" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSubscriber" Type="int" Nullable="false" />
+          <Property Name="IdPublication" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.AddressesView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="AddressesView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="IdDistrict" />
+            <PropertyRef Name="SectorName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Building" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="IdDistrict" Type="int" Nullable="false" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postman" Type="nvarchar" MaxLength="66" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.PostmansAddView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PostmansAddView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SurnameNP" Type="nvarchar" MaxLength="66" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.PostmansView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PostmansView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Patronymic" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.PublicationsAddView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PublicationsAddView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.PublicationsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="PublicationsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PubTitle" />
+            <PropertyRef Name="PubType" />
+            <PropertyRef Name="PubIndex" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PubTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PubType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PubIndex" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.SubscribersAddView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SubscribersAddView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SurnameNP" Type="nvarchar" MaxLength="66" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.SubscribersView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SubscribersView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Patronymic" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="Apartment" />
+            <PropertyRef Name="IdDistrict" />
+            <PropertyRef Name="SectorName" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Building" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Apartment" Type="int" Nullable="false" />
+          <Property Name="IdDistrict" Type="int" Nullable="false" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postman" Type="nvarchar" MaxLength="66" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "D:\ШАГ\КУРСОВАЯ\COURSEWORK\COURSEWORK\APP_DATA\POSTALSERVICE.MDF.dbo.SubscriptionsView" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="SubscriptionsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Patronymic" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="Apartment" />
+            <PropertyRef Name="IdDistrict" />
+            <PropertyRef Name="SectorName" />
+            <PropertyRef Name="PubType" />
+            <PropertyRef Name="PubIndex" />
+            <PropertyRef Name="PubTitle" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Building" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Apartment" Type="int" Nullable="false" />
+          <Property Name="IdDistrict" Type="int" Nullable="false" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postman" Type="nvarchar" MaxLength="66" />
+          <Property Name="PubType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PubIndex" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="PubTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="TotalPrice" Type="int" />
+        </EntityType>
+        <Association Name="FK_Addresses_Districts">
+          <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="IdDistrict" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Addresses_Streets">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="IdStreet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disctricts_Postmans">
+          <End Role="Postmans" Type="Self.Postmans" Multiplicity="1" />
+          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postmans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="IdPostman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disctricts_Sectors">
+          <End Role="Sectors" Type="Self.Sectors" Multiplicity="1" />
+          <End Role="Districts" Type="Self.Districts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postmans_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Postmans" Type="Self.Postmans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Postmans">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publications_Pubtypes">
+          <End Role="PubTypes" Type="Self.PubTypes" Multiplicity="1" />
+          <End Role="Publications" Type="Self.Publications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PubTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Publications">
+              <PropertyRef Name="IdPubType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_Addresses">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="IdAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribes_Publications">
+          <End Role="Publications" Type="Self.Publications" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="IdPublication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribes_Subscribers">
+          <End Role="Subscribers" Type="Self.Subscribers" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="IdSubscriber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddressPostman" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="street" Type="nvarchar" Mode="In" />
+          <Parameter Name="building" Type="nvarchar" Mode="In" />
+          <Parameter Name="apartment" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EachPubAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="PostmansAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SubscribersNewspapers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="surname" Type="nvarchar" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="patronymic" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SubscribtionAverageTerms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TopPubsDistrict" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище PostalServiceModelContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postmans" EntityType="Self.Postmans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publications" EntityType="Self.Publications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PubTypes" EntityType="Self.PubTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sectors" EntityType="Self.Sectors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Streets" EntityType="Self.Streets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscribers" EntityType="Self.Subscribers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AddressesView" EntityType="Self.AddressesView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AddressesView].[Id] AS [Id], 
+    [AddressesView].[Street] AS [Street], 
+    [AddressesView].[Building] AS [Building], 
+    [AddressesView].[IdDistrict] AS [IdDistrict], 
+    [AddressesView].[SectorName] AS [SectorName], 
+    [AddressesView].[Postman] AS [Postman]
+    FROM [dbo].[AddressesView] AS [AddressesView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PostmansAddView" EntityType="Self.PostmansAddView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PostmansAddView].[Id] AS [Id], 
+    [PostmansAddView].[SurnameNP] AS [SurnameNP]
+    FROM [dbo].[PostmansAddView] AS [PostmansAddView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PostmansView" EntityType="Self.PostmansView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PostmansView].[Id] AS [Id], 
+    [PostmansView].[Surname] AS [Surname], 
+    [PostmansView].[Name] AS [Name], 
+    [PostmansView].[Patronymic] AS [Patronymic]
+    FROM [dbo].[PostmansView] AS [PostmansView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PublicationsAddView" EntityType="Self.PublicationsAddView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PublicationsAddView].[Id] AS [Id], 
+    [PublicationsAddView].[Title] AS [Title]
+    FROM [dbo].[PublicationsAddView] AS [PublicationsAddView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PublicationsView" EntityType="Self.PublicationsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PublicationsView].[Id] AS [Id], 
+    [PublicationsView].[PubTitle] AS [PubTitle], 
+    [PublicationsView].[PubType] AS [PubType], 
+    [PublicationsView].[PubIndex] AS [PubIndex], 
+    [PublicationsView].[Price] AS [Price]
+    FROM [dbo].[PublicationsView] AS [PublicationsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SubscribersAddView" EntityType="Self.SubscribersAddView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SubscribersAddView].[Id] AS [Id], 
+    [SubscribersAddView].[SurnameNP] AS [SurnameNP]
+    FROM [dbo].[SubscribersAddView] AS [SubscribersAddView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SubscribersView" EntityType="Self.SubscribersView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SubscribersView].[Id] AS [Id], 
+    [SubscribersView].[Surname] AS [Surname], 
+    [SubscribersView].[Name] AS [Name], 
+    [SubscribersView].[Patronymic] AS [Patronymic], 
+    [SubscribersView].[Street] AS [Street], 
+    [SubscribersView].[Building] AS [Building], 
+    [SubscribersView].[Apartment] AS [Apartment], 
+    [SubscribersView].[IdDistrict] AS [IdDistrict], 
+    [SubscribersView].[SectorName] AS [SectorName], 
+    [SubscribersView].[Postman] AS [Postman]
+    FROM [dbo].[SubscribersView] AS [SubscribersView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SubscriptionsView" EntityType="Self.SubscriptionsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SubscriptionsView].[Id] AS [Id], 
+    [SubscriptionsView].[Surname] AS [Surname], 
+    [SubscriptionsView].[Name] AS [Name], 
+    [SubscriptionsView].[Patronymic] AS [Patronymic], 
+    [SubscriptionsView].[Street] AS [Street], 
+    [SubscriptionsView].[Building] AS [Building], 
+    [SubscriptionsView].[Apartment] AS [Apartment], 
+    [SubscriptionsView].[IdDistrict] AS [IdDistrict], 
+    [SubscriptionsView].[SectorName] AS [SectorName], 
+    [SubscriptionsView].[Postman] AS [Postman], 
+    [SubscriptionsView].[PubType] AS [PubType], 
+    [SubscriptionsView].[PubIndex] AS [PubIndex], 
+    [SubscriptionsView].[PubTitle] AS [PubTitle], 
+    [SubscriptionsView].[StartDate] AS [StartDate], 
+    [SubscriptionsView].[Duration] AS [Duration], 
+    [SubscriptionsView].[TotalPrice] AS [TotalPrice]
+    FROM [dbo].[SubscriptionsView] AS [SubscriptionsView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Addresses_Districts" Association="Self.FK_Addresses_Districts">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Addresses_Streets" Association="Self.FK_Addresses_Streets">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disctricts_Postmans" Association="Self.FK_Disctricts_Postmans">
+            <End Role="Postmans" EntitySet="Postmans" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disctricts_Sectors" Association="Self.FK_Disctricts_Sectors">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postmans_Persons" Association="Self.FK_Postmans_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Postmans" EntitySet="Postmans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publications_Pubtypes" Association="Self.FK_Publications_Pubtypes">
+            <End Role="PubTypes" EntitySet="PubTypes" />
+            <End Role="Publications" EntitySet="Publications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_Addresses" Association="Self.FK_Subscribers_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_Persons" Association="Self.FK_Subscribers_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribes_Publications" Association="Self.FK_Subscribes_Publications">
+            <End Role="Publications" EntitySet="Publications" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribes_Subscribers" Association="Self.FK_Subscribes_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PostalServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdStreet" Type="Int32" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdDistrict" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="District" Relationship="Self.FK_Addresses_Districts" FromRole="Addresses" ToRole="Districts" />
+          <NavigationProperty Name="Street" Relationship="Self.FK_Addresses_Streets" FromRole="Addresses" ToRole="Streets" />
+          <NavigationProperty Name="Subscribers" Relationship="Self.FK_Subscribers_Addresses" FromRole="Addresses" ToRole="Subscribers" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPostman" Type="Int32" Nullable="false" />
+          <Property Name="IdSector" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK_Addresses_Districts" FromRole="Districts" ToRole="Addresses" />
+          <NavigationProperty Name="Postman" Relationship="Self.FK_Disctricts_Postmans" FromRole="Districts" ToRole="Postmans" />
+          <NavigationProperty Name="Sector" Relationship="Self.FK_Disctricts_Sectors" FromRole="Districts" ToRole="Sectors" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Postmans" Relationship="Self.FK_Postmans_Persons" FromRole="Persons" ToRole="Postmans" />
+          <NavigationProperty Name="Subscribers" Relationship="Self.FK_Subscribers_Persons" FromRole="Persons" ToRole="Subscribers" />
+        </EntityType>
+        <EntityType Name="Postman">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPerson" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Districts" Relationship="Self.FK_Disctricts_Postmans" FromRole="Postmans" ToRole="Districts" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Postmans_Persons" FromRole="Postmans" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Publication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPubType" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PubIndex" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PubType" Relationship="Self.FK_Publications_Pubtypes" FromRole="Publications" ToRole="PubTypes" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FK_Subscribes_Publications" FromRole="Publications" ToRole="Subscriptions" />
+        </EntityType>
+        <EntityType Name="PubType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Publications" Relationship="Self.FK_Publications_Pubtypes" FromRole="PubTypes" ToRole="Publications" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Districts" Relationship="Self.FK_Disctricts_Sectors" FromRole="Sectors" ToRole="Districts" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK_Addresses_Streets" FromRole="Streets" ToRole="Addresses" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPerson" Type="Int32" Nullable="false" />
+          <Property Name="IdAddress" Type="Int32" Nullable="false" />
+          <Property Name="SubAddress" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Subscribers_Addresses" FromRole="Subscribers" ToRole="Addresses" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Subscribers_Persons" FromRole="Subscribers" ToRole="Persons" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FK_Subscribes_Subscribers" FromRole="Subscribers" ToRole="Subscriptions" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSubscriber" Type="Int32" Nullable="false" />
+          <Property Name="IdPublication" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Publication" Relationship="Self.FK_Subscribes_Publications" FromRole="Subscriptions" ToRole="Publications" />
+          <NavigationProperty Name="Subscriber" Relationship="Self.FK_Subscribes_Subscribers" FromRole="Subscriptions" ToRole="Subscribers" />
+        </EntityType>
+        <EntityType Name="AddressesView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="IdDistrict" />
+            <PropertyRef Name="SectorName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdDistrict" Type="Int32" Nullable="false" />
+          <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Postman" Type="String" MaxLength="66" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PublicationsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PubTitle" />
+            <PropertyRef Name="PubType" />
+            <PropertyRef Name="PubIndex" />
+            <PropertyRef Name="Price" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PubTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PubType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PubIndex" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubscribersView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Patronymic" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="Apartment" />
+            <PropertyRef Name="IdDistrict" />
+            <PropertyRef Name="SectorName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apartment" Type="Int32" Nullable="false" />
+          <Property Name="IdDistrict" Type="Int32" Nullable="false" />
+          <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Postman" Type="String" MaxLength="66" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Addresses_Districts">
+          <End Role="Districts" Type="Self.District" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Districts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="IdDistrict" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Addresses_Streets">
+          <End Role="Streets" Type="Self.Street" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="IdStreet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_Addresses">
+          <End Role="Addresses" Type="Self.Address" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscriber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="IdAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disctricts_Postmans">
+          <End Role="Postmans" Type="Self.Postman" Multiplicity="1" />
+          <End Role="Districts" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postmans">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="IdPostman" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disctricts_Sectors">
+          <End Role="Sectors" Type="Self.Sector" Multiplicity="1" />
+          <End Role="Districts" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sectors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Districts">
+              <PropertyRef Name="IdSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postmans_Persons">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1" />
+          <End Role="Postmans" Type="Self.Postman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Postmans">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribers_Persons">
+          <End Role="Persons" Type="Self.Person" Multiplicity="1" />
+          <End Role="Subscribers" Type="Self.Subscriber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscribers">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publications_Pubtypes">
+          <End Role="PubTypes" Type="Self.PubType" Multiplicity="1" />
+          <End Role="Publications" Type="Self.Publication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PubTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Publications">
+              <PropertyRef Name="IdPubType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribes_Publications">
+          <End Role="Publications" Type="Self.Publication" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="IdPublication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subscribes_Subscribers">
+          <End Role="Subscribers" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscribers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="IdSubscriber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PostalServiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Districts" EntityType="Self.District" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
+          <EntitySet Name="Postmans" EntityType="Self.Postman" />
+          <EntitySet Name="Publications" EntityType="Self.Publication" />
+          <EntitySet Name="PubTypes" EntityType="Self.PubType" />
+          <EntitySet Name="Sectors" EntityType="Self.Sector" />
+          <EntitySet Name="Streets" EntityType="Self.Street" />
+          <EntitySet Name="Subscribers" EntityType="Self.Subscriber" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+          <EntitySet Name="AddressesViews" EntityType="Self.AddressesView" />
+          <EntitySet Name="PublicationsViews" EntityType="Self.PublicationsView" />
+          <EntitySet Name="SubscribersViews" EntityType="Self.SubscribersView" />
+          <AssociationSet Name="FK_Addresses_Districts" Association="Self.FK_Addresses_Districts">
+            <End Role="Districts" EntitySet="Districts" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Addresses_Streets" Association="Self.FK_Addresses_Streets">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_Addresses" Association="Self.FK_Subscribers_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disctricts_Postmans" Association="Self.FK_Disctricts_Postmans">
+            <End Role="Postmans" EntitySet="Postmans" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disctricts_Sectors" Association="Self.FK_Disctricts_Sectors">
+            <End Role="Sectors" EntitySet="Sectors" />
+            <End Role="Districts" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postmans_Persons" Association="Self.FK_Postmans_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Postmans" EntitySet="Postmans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribers_Persons" Association="Self.FK_Subscribers_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Subscribers" EntitySet="Subscribers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publications_Pubtypes" Association="Self.FK_Publications_Pubtypes">
+            <End Role="PubTypes" EntitySet="PubTypes" />
+            <End Role="Publications" EntitySet="Publications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribes_Publications" Association="Self.FK_Subscribes_Publications">
+            <End Role="Publications" EntitySet="Publications" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subscribes_Subscribers" Association="Self.FK_Subscribes_Subscribers">
+            <End Role="Subscribers" EntitySet="Subscribers" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <FunctionImport Name="AddressPostman" ReturnType="Collection(PostalServiceModel.AddressPostman_Result)">
+            <Parameter Name="street" Mode="In" Type="String" />
+            <Parameter Name="building" Mode="In" Type="String" />
+            <Parameter Name="apartment" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EachPubAmount" />
+          <FunctionImport Name="PostmansAmount" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="SubscribersNewspapers">
+            <Parameter Name="surname" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="patronymic" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SubscribesAverageTerms" />
+          <FunctionImport Name="TopPubsDistrict" />
+          <EntitySet Name="PostmansAddViews" EntityType="PostalServiceModel.PostmansAddView" />
+          <EntitySet Name="PostmansViews" EntityType="PostalServiceModel.PostmansView" />
+          <EntitySet Name="SubscribersAddViews" EntityType="PostalServiceModel.SubscribersAddView" />
+          <EntitySet Name="SubscriptionsViews" EntityType="PostalServiceModel.SubscriptionsView" />
+          <FunctionImport Name="SubscribtionAverageTerms" />
+          <EntitySet Name="PublicationsAddViews" EntityType="PostalServiceModel.PublicationsAddView" />
+        </EntityContainer>
+        <ComplexType Name="AddressPostman_Result">
+          <Property Type="String" Name="Subscriber" Nullable="true" MaxLength="66" />
+          <Property Type="String" Name="Street" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Building" Nullable="false" MaxLength="5" />
+          <Property Type="Int32" Name="Apartment" Nullable="false" />
+          <Property Type="String" Name="Postman" Nullable="true" MaxLength="66" />
+        </ComplexType>
+        <EntityType Name="PostmansAddView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SurnameNP" Type="String" MaxLength="66" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PostmansView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Patronymic" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SubscribersAddView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SurnameNP" Type="String" MaxLength="66" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SubscriptionsView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Surname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Patronymic" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Building" />
+            <PropertyRef Name="Apartment" />
+            <PropertyRef Name="IdDistrict" />
+            <PropertyRef Name="SectorName" />
+            <PropertyRef Name="PubType" />
+            <PropertyRef Name="PubIndex" />
+            <PropertyRef Name="PubTitle" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="Duration" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Building" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Apartment" Type="Int32" Nullable="false" />
+          <Property Name="IdDistrict" Type="Int32" Nullable="false" />
+          <Property Name="SectorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Postman" Type="String" MaxLength="66" FixedLength="false" Unicode="true" />
+          <Property Name="PubType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PubIndex" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PubTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PublicationsAddView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Title" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PostalServiceModelContainer" CdmEntityContainer="PostalServiceEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="PostalServiceModel.Address">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdStreet" ColumnName="IdStreet" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="IdDistrict" ColumnName="IdDistrict" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="PostalServiceModel.District">
+              <MappingFragment StoreEntitySet="Districts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPostman" ColumnName="IdPostman" />
+                <ScalarProperty Name="IdSector" ColumnName="IdSector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="PostalServiceModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postmans">
+            <EntityTypeMapping TypeName="PostalServiceModel.Postman">
+              <MappingFragment StoreEntitySet="Postmans">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publications">
+            <EntityTypeMapping TypeName="PostalServiceModel.Publication">
+              <MappingFragment StoreEntitySet="Publications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPubType" ColumnName="IdPubType" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PubIndex" ColumnName="PubIndex" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PubTypes">
+            <EntityTypeMapping TypeName="PostalServiceModel.PubType">
+              <MappingFragment StoreEntitySet="PubTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sectors">
+            <EntityTypeMapping TypeName="PostalServiceModel.Sector">
+              <MappingFragment StoreEntitySet="Sectors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Streets">
+            <EntityTypeMapping TypeName="PostalServiceModel.Street">
+              <MappingFragment StoreEntitySet="Streets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscribers">
+            <EntityTypeMapping TypeName="PostalServiceModel.Subscriber">
+              <MappingFragment StoreEntitySet="Subscribers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="SubAddress" ColumnName="SubAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="PostalServiceModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdSubscriber" ColumnName="IdSubscriber" />
+                <ScalarProperty Name="IdPublication" ColumnName="IdPublication" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressesViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.AddressesView">
+              <MappingFragment StoreEntitySet="AddressesView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="IdDistrict" ColumnName="IdDistrict" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="Postman" ColumnName="Postman" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PublicationsViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.PublicationsView">
+              <MappingFragment StoreEntitySet="PublicationsView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PubTitle" ColumnName="PubTitle" />
+                <ScalarProperty Name="PubType" ColumnName="PubType" />
+                <ScalarProperty Name="PubIndex" ColumnName="PubIndex" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscribersViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.SubscribersView">
+              <MappingFragment StoreEntitySet="SubscribersView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="IdDistrict" ColumnName="IdDistrict" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="Postman" ColumnName="Postman" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddressPostman" FunctionName="Хранилище PostalServiceModel.AddressPostman">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PostalServiceModel.AddressPostman_Result">
+                <ScalarProperty Name="Subscriber" ColumnName="Subscriber" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="Postman" ColumnName="Postman" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EachPubAmount" FunctionName="Хранилище PostalServiceModel.EachPubAmount" />
+          <FunctionImportMapping FunctionImportName="PostmansAmount" FunctionName="Хранилище PostalServiceModel.PostmansAmount" />
+          <FunctionImportMapping FunctionImportName="SubscribersNewspapers" FunctionName="Хранилище PostalServiceModel.SubscribersNewspapers" />
+          <FunctionImportMapping FunctionImportName="TopPubsDistrict" FunctionName="Хранилище PostalServiceModel.TopPubsDistrict" />
+          <EntitySetMapping Name="PostmansAddViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.PostmansAddView">
+              <MappingFragment StoreEntitySet="PostmansAddView">
+                <ScalarProperty Name="SurnameNP" ColumnName="SurnameNP" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostmansViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.PostmansView">
+              <MappingFragment StoreEntitySet="PostmansView">
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscribersAddViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.SubscribersAddView">
+              <MappingFragment StoreEntitySet="SubscribersAddView">
+                <ScalarProperty Name="SurnameNP" ColumnName="SurnameNP" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriptionsViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.SubscriptionsView">
+              <MappingFragment StoreEntitySet="SubscriptionsView">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="PubTitle" ColumnName="PubTitle" />
+                <ScalarProperty Name="PubIndex" ColumnName="PubIndex" />
+                <ScalarProperty Name="PubType" ColumnName="PubType" />
+                <ScalarProperty Name="Postman" ColumnName="Postman" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="IdDistrict" ColumnName="IdDistrict" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SubscribtionAverageTerms" FunctionName="Хранилище PostalServiceModel.SubscribtionAverageTerms" />
+          <EntitySetMapping Name="PublicationsAddViews">
+            <EntityTypeMapping TypeName="PostalServiceModel.PublicationsAddView">
+              <MappingFragment StoreEntitySet="PublicationsAddView">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

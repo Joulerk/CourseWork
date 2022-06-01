@@ -1,0 +1,109 @@
+﻿<Window x:Class="PostalService.Views.SubscriptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostalService.Views"
+        xmlns:models="clr-namespace:PostalService.Models"
+        mc:Ignorable="d"
+        Title="Добавить подписку" 
+        Height="550" Width="300"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        ShowInTaskbar="False" 
+        FontFamily="Verdana">
+    <GroupBox Header="Данные подписки:" BorderThickness="2" BorderBrush="Indigo" Margin="5">
+
+        <Grid >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <!-- Подписчик -->
+            <StackPanel Grid.Row="0" >
+
+                <TextBox IsReadOnly="True"
+                     BorderThickness="0" 
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     HorizontalContentAlignment="Left" 
+                     Margin="5"
+                     Text="Подписчик: "/>
+                <ComboBox Name="CmbSubscriber"
+                      AllowDrop="True"
+                      Margin="5"
+                      Width="150"
+                      HorizontalContentAlignment="Left"/>
+            </StackPanel>
+
+            <!-- Издание -->
+            <StackPanel Grid.Row="1" >
+
+                <TextBox IsReadOnly="True"
+                     BorderThickness="0" 
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     HorizontalContentAlignment="Left" 
+                     Margin="5"
+                     Text="Издание: "/>
+                <ComboBox Name="CmbPublication"
+                      AllowDrop="True"
+                      Margin="5"
+                      Width="150"
+                      HorizontalContentAlignment="Left"/>
+            </StackPanel>
+
+            <!-- Дата начала -->
+            <StackPanel Grid.Row="2" >
+
+                <TextBox IsReadOnly="True"
+                     BorderThickness="0" 
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     HorizontalContentAlignment="Left" 
+                     Margin="5"
+                     Text="Дата начала: "/>
+                <DatePicker
+                    Name="DpDateStart"
+                    Margin="0 5"
+                    SelectedDateFormat="Long"/>
+            </StackPanel>
+            
+            <!-- Продолжительность -->
+            <StackPanel Grid.Row="3">
+
+                <TextBox IsReadOnly="True"
+                     BorderThickness="0" 
+                     Width="150"
+                     Margin="7.5"
+                     FontSize="13"
+                     Text="Продолжительность:"/>
+                <TextBox Name="TbDuration"
+                     Width="150"
+                     FontSize="18"
+                     Height="25"
+                     Text="1"/>
+            </StackPanel>
+
+            <Button Grid.Row="4"
+                Background="Indigo" Foreground="White"
+                     FontSize="18"
+                    Margin="0 0 0 0"
+                    Height="35"
+                    Width="100"
+                    Click="OK_Command"
+                    IsDefault="True">
+                OK
+                <Button.ToolTip>
+                    <ToolTip>Добавить</ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
+    </GroupBox>
+</Window>
